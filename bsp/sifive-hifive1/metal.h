@@ -81,8 +81,10 @@
 #include <metal/drivers/sifive_gpio-leds.h>
 #include <metal/drivers/sifive_spi0.h>
 #include <metal/drivers/sifive_uart0.h>
+#include <metal/drivers/sifive_wdog0.h>
 #include <metal/drivers/sifive_fe310-g000_hfrosc.h>
 #include <metal/drivers/sifive_fe310-g000_hfxosc.h>
+#include <metal/drivers/sifive_fe310-g000_lfrosc.h>
 #include <metal/drivers/sifive_fe310-g000_pll.h>
 #include <metal/drivers/sifive_fe310-g000_prci.h>
 
@@ -131,11 +133,17 @@ struct __metal_driver_sifive_spi0 __metal_dt_spi_10014000;
 /* From serial@10013000 */
 struct __metal_driver_sifive_uart0 __metal_dt_serial_10013000;
 
+/* From aon@10000000 */
+struct __metal_driver_sifive_wdog0 __metal_dt_aon_10000000;
+
 /* From clock@3 */
 struct __metal_driver_sifive_fe310_g000_hfrosc __metal_dt_clock_3;
 
 /* From clock@1 */
 struct __metal_driver_sifive_fe310_g000_hfxosc __metal_dt_clock_1;
+
+/* From clock@6 */
+struct __metal_driver_sifive_fe310_g000_lfrosc __metal_dt_clock_6;
 
 /* From clock@4 */
 struct __metal_driver_sifive_fe310_g000_pll __metal_dt_clock_4;
@@ -576,8 +584,6 @@ static inline char * __metal_driver_sifive_gpio_led_label(struct metal_led *led)
 
 /* --------------------- sifive_gpio_switch ------------ */
 
-
-/* --------------------- sifive_spi0 ------------ */
 static inline unsigned long __metal_driver_sifive_spi0_control_base(struct metal_spi *spi)
 {
 	if ((uintptr_t)spi == (uintptr_t)&__metal_dt_spi_10014000) {
@@ -600,22 +606,42 @@ static inline unsigned long __metal_driver_sifive_spi0_control_size(struct metal
 
 static inline struct metal_clock * __metal_driver_sifive_spi0_clock(struct metal_spi *spi)
 {
+	if ((uintptr_t)spi == (uintptr_t)&__metal_dt_spi_10014000) {
 		return (struct metal_clock *)&__metal_dt_clock_4.clock;
+	}
+	else {
+		return 0;
+	}
 }
 
 static inline struct __metal_driver_sifive_gpio0 * __metal_driver_sifive_spi0_pinmux(struct metal_spi *spi)
 {
+	if ((uintptr_t)spi == (uintptr_t)&__metal_dt_spi_10014000) {
 		return (struct __metal_driver_sifive_gpio0 *)&__metal_dt_gpio_10012000;
+	}
+	else {
+		return 0;
+	}
 }
 
 static inline unsigned long __metal_driver_sifive_spi0_pinmux_output_selector(struct metal_spi *spi)
 {
+	if ((uintptr_t)spi == (uintptr_t)&__metal_dt_spi_10014000) {
 		return 60;
+	}
+	else {
+		return 0;
+	}
 }
 
 static inline unsigned long __metal_driver_sifive_spi0_pinmux_source_selector(struct metal_spi *spi)
 {
+	if ((uintptr_t)spi == (uintptr_t)&__metal_dt_spi_10014000) {
 		return 60;
+	}
+	else {
+		return 0;
+	}
 }
 
 
@@ -660,33 +686,111 @@ static inline struct metal_interrupt * __metal_driver_sifive_uart0_interrupt_par
 		return (struct metal_interrupt *)&__metal_dt_interrupt_controller_c000000.controller;
 	}
 	else {
-		return NULL;
+		return 0;
 	}
 }
 
 static inline int __metal_driver_sifive_uart0_interrupt_line(struct metal_uart *uart)
 {
+	if ((uintptr_t)uart == (uintptr_t)&__metal_dt_serial_10013000) {
 		return 5;
+	}
+	else {
+		return 0;
+	}
 }
 
 static inline struct metal_clock * __metal_driver_sifive_uart0_clock(struct metal_uart *uart)
 {
+	if ((uintptr_t)uart == (uintptr_t)&__metal_dt_serial_10013000) {
 		return (struct metal_clock *)&__metal_dt_clock_4.clock;
+	}
+	else {
+		return 0;
+	}
 }
 
 static inline struct __metal_driver_sifive_gpio0 * __metal_driver_sifive_uart0_pinmux(struct metal_uart *uart)
 {
+	if ((uintptr_t)uart == (uintptr_t)&__metal_dt_serial_10013000) {
 		return (struct __metal_driver_sifive_gpio0 *)&__metal_dt_gpio_10012000;
+	}
+	else {
+		return 0;
+	}
 }
 
 static inline unsigned long __metal_driver_sifive_uart0_pinmux_output_selector(struct metal_uart *uart)
 {
+	if ((uintptr_t)uart == (uintptr_t)&__metal_dt_serial_10013000) {
 		return 196608;
+	}
+	else {
+		return 0;
+	}
 }
 
 static inline unsigned long __metal_driver_sifive_uart0_pinmux_source_selector(struct metal_uart *uart)
 {
+	if ((uintptr_t)uart == (uintptr_t)&__metal_dt_serial_10013000) {
 		return 196608;
+	}
+	else {
+		return 0;
+	}
+}
+
+
+
+/* --------------------- sifive_wdog0 ------------ */
+static inline unsigned long __metal_driver_sifive_wdog0_control_base(const struct metal_watchdog *const watchdog)
+{
+	if ((uintptr_t)watchdog == (uintptr_t)&__metal_dt_aon_10000000) {
+		return METAL_SIFIVE_AON0_10000000_BASE_ADDRESS;
+	}
+	else {
+		return 0;
+	}
+}
+
+static inline unsigned long __metal_driver_sifive_wdog0_control_size(const struct metal_watchdog *const watchdog)
+{
+	if ((uintptr_t)watchdog == (uintptr_t)&__metal_dt_aon_10000000) {
+		return METAL_SIFIVE_AON0_10000000_SIZE;
+	}
+	else {
+		return 0;
+	}
+}
+
+static inline struct metal_interrupt * __metal_driver_sifive_wdog0_interrupt_parent(const struct metal_watchdog *const watchdog)
+{
+	if ((uintptr_t)watchdog == (uintptr_t)&__metal_dt_aon_10000000) {
+		return NULL;
+	}
+	else {
+		return 0;
+	}
+}
+
+static inline int __metal_driver_sifive_wdog0_interrupt_line(const struct metal_watchdog *const watchdog)
+{
+	if ((uintptr_t)watchdog == (uintptr_t)&__metal_dt_aon_10000000) {
+		return 0;
+	}
+	else {
+		return 0;
+	}
+}
+
+static inline struct metal_clock * __metal_driver_sifive_wdog0_clock(const struct metal_watchdog *const watchdog)
+{
+	if ((uintptr_t)watchdog == (uintptr_t)&__metal_dt_aon_10000000) {
+		return NULL;
+	}
+	else {
+		return 0;
+	}
 }
 
 
@@ -728,6 +832,49 @@ static inline struct __metal_driver_sifive_fe310_g000_prci * __metal_driver_sifi
 static inline long __metal_driver_sifive_fe310_g000_hfxosc_config_offset(const struct metal_clock *clock)
 {
 		return METAL_SIFIVE_FE310_G000_PRCI_HFXOSCCFG;
+}
+
+
+
+/* --------------------- sifive_fe310_g000_lfrosc ------------ */
+static inline struct metal_clock * __metal_driver_sifive_fe310_g000_lfrosc_lfrosc(const struct metal_clock *clock)
+{
+	if ((struct metal_clock *)&__metal_dt_clock_6) {
+		return NULL;
+	}
+	else {
+		return NULL;
+	}
+}
+
+static inline struct metal_clock * __metal_driver_sifive_fe310_g000_lfrosc_psdlfaltclk(const struct metal_clock *clock)
+{
+	if ((struct metal_clock *)&__metal_dt_clock_6) {
+		return NULL;
+	}
+	else {
+		return NULL;
+	}
+}
+
+static inline unsigned long int __metal_driver_sifive_fe310_g000_lfrosc_config_reg(const struct metal_clock *clock)
+{
+	if ((struct metal_clock *)&__metal_dt_clock_6) {
+		return 112;
+	}
+	else {
+		return 0;
+	}
+}
+
+static inline unsigned long int __metal_driver_sifive_fe310_g000_lfrosc_mux_reg(const struct metal_clock *clock)
+{
+	if ((struct metal_clock *)&__metal_dt_clock_6) {
+		return 0;
+	}
+	else {
+		return 0;
+	}
 }
 
 
@@ -855,6 +1002,12 @@ struct __metal_driver_sifive_gpio_switch *__metal_switch_table[] = {
 asm (".weak __metal_spi_table");
 struct __metal_driver_sifive_spi0 *__metal_spi_table[] = {
 					&__metal_dt_spi_10014000};
+
+#define __METAL_DT_MAX_WDOGS 1
+
+asm (".weak __metal_wdog_table");
+struct __metal_driver_sifive_wdog0 *__metal_wdog_table[] = {
+					&__metal_dt_aon_10000000};
 
 /* From clock@4 */
 #define __METAL_DT_SIFIVE_FE310_G000_PLL_HANDLE (&__metal_dt_clock_4)

@@ -97,6 +97,14 @@ extern inline unsigned long __metal_driver_sifive_uart0_pinmux_output_selector(s
 extern inline unsigned long __metal_driver_sifive_uart0_pinmux_source_selector(struct metal_uart *uart);
 
 
+/* --------------------- sifive_wdog0 ------------ */
+extern inline unsigned long __metal_driver_sifive_wdog0_control_base(const struct metal_watchdog *const watchdog);
+extern inline unsigned long __metal_driver_sifive_wdog0_control_size(const struct metal_watchdog *const watchdog);
+extern inline struct metal_interrupt * __metal_driver_sifive_wdog0_interrupt_parent(const struct metal_watchdog *const watchdog);
+extern inline int __metal_driver_sifive_wdog0_interrupt_line(const struct metal_watchdog *const watchdog);
+extern inline struct metal_clock * __metal_driver_sifive_wdog0_clock(const struct metal_watchdog *const watchdog);
+
+
 /* --------------------- sifive_fe310_g000_hfrosc ------------ */
 extern inline struct metal_clock * __metal_driver_sifive_fe310_g000_hfrosc_ref(const struct metal_clock *clock);
 extern inline struct __metal_driver_sifive_fe310_g000_prci * __metal_driver_sifive_fe310_g000_hfrosc_config_base(const struct metal_clock *clock);
@@ -108,6 +116,13 @@ extern inline long __metal_driver_sifive_fe310_g000_hfrosc_config_offset(const s
 extern inline struct metal_clock * __metal_driver_sifive_fe310_g000_hfxosc_ref(const struct metal_clock *clock);
 extern inline struct __metal_driver_sifive_fe310_g000_prci * __metal_driver_sifive_fe310_g000_hfxosc_config_base(const struct metal_clock *clock);
 extern inline long __metal_driver_sifive_fe310_g000_hfxosc_config_offset(const struct metal_clock *clock);
+
+
+/* --------------------- sifive_fe310_g000_lfrosc ------------ */
+extern inline struct metal_clock * __metal_driver_sifive_fe310_g000_lfrosc_lfrosc(const struct metal_clock *clock);
+extern inline struct metal_clock * __metal_driver_sifive_fe310_g000_lfrosc_psdlfaltclk(const struct metal_clock *clock);
+extern inline unsigned long int __metal_driver_sifive_fe310_g000_lfrosc_config_reg(const struct metal_clock *clock);
+extern inline unsigned long int __metal_driver_sifive_fe310_g000_lfrosc_mux_reg(const struct metal_clock *clock);
 
 
 /* --------------------- sifive_fe310_g000_pll ------------ */
@@ -225,6 +240,11 @@ struct __metal_driver_sifive_uart0 __metal_dt_serial_10013000 = {
     .uart.vtable = &__metal_driver_vtable_sifive_uart0.uart,
 };
 
+/* From aon@10000000 */
+struct __metal_driver_sifive_wdog0 __metal_dt_aon_10000000 = {
+    .watchdog.vtable = &__metal_driver_vtable_sifive_wdog0.watchdog,
+};
+
 /* From clock@3 */
 struct __metal_driver_sifive_fe310_g000_hfrosc __metal_dt_clock_3 = {
     .clock.vtable = &__metal_driver_vtable_sifive_fe310_g000_hfrosc.clock,
@@ -233,6 +253,11 @@ struct __metal_driver_sifive_fe310_g000_hfrosc __metal_dt_clock_3 = {
 /* From clock@1 */
 struct __metal_driver_sifive_fe310_g000_hfxosc __metal_dt_clock_1 = {
     .clock.vtable = &__metal_driver_vtable_sifive_fe310_g000_hfxosc.clock,
+};
+
+/* From clock@6 */
+struct __metal_driver_sifive_fe310_g000_lfrosc __metal_dt_clock_6 = {
+    .clock.vtable = &__metal_driver_vtable_sifive_fe310_g000_lfrosc.clock,
 };
 
 /* From clock@4 */
