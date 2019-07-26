@@ -71,6 +71,9 @@ extern inline int __metal_driver_sifive_gpio0_interrupt_lines(struct metal_gpio 
 /* --------------------- sifive_gpio_switch ------------ */
 
 
+/* --------------------- sifive_rtc0 ------------ */
+
+
 /* --------------------- sifive_spi0 ------------ */
 extern inline unsigned long __metal_driver_sifive_spi0_control_base(struct metal_spi *spi);
 extern inline unsigned long __metal_driver_sifive_spi0_control_size(struct metal_spi *spi);
@@ -80,8 +83,8 @@ extern inline unsigned long __metal_driver_sifive_spi0_pinmux_source_selector(st
 
 
 /* --------------------- sifive_test0 ------------ */
-extern inline unsigned long __metal_driver_sifive_test0_base( );
-extern inline unsigned long __metal_driver_sifive_test0_size( );
+extern inline unsigned long __metal_driver_sifive_test0_base(const struct __metal_shutdown *sd);
+extern inline unsigned long __metal_driver_sifive_test0_size(const struct __metal_shutdown *sd);
 
 
 /* --------------------- sifive_uart0 ------------ */
@@ -96,10 +99,16 @@ extern inline unsigned long __metal_driver_sifive_uart0_pinmux_output_selector(s
 extern inline unsigned long __metal_driver_sifive_uart0_pinmux_source_selector(struct metal_uart *uart);
 
 
+/* --------------------- sifive_wdog0 ------------ */
+
+
 /* --------------------- sifive_fe310_g000_hfrosc ------------ */
 
 
 /* --------------------- sifive_fe310_g000_hfxosc ------------ */
+
+
+/* --------------------- sifive_fe310_g000_lfrosc ------------ */
 
 
 /* --------------------- sifive_fe310_g000_pll ------------ */
