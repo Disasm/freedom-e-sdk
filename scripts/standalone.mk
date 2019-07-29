@@ -101,6 +101,10 @@ QEMU_RISCV64 = qemu-system-riscv64
 # Software Flags
 #############################################################
 
+# Set the C standard and warnings
+RISCV_CFLAGS   += -std=c99 -Wall -Wextra -Wpedantic -Wno-unused-parameter
+RISCV_CXXFLAGS += -std=c99 -Wall -Wextra -Wpedantic -Wno-unused-parameter
+
 # Set the arch, ABI, and code model
 RISCV_CCASFLAGS += -march=$(RISCV_ARCH) -mabi=$(RISCV_ABI) -mcmodel=$(RISCV_CMODEL)
 RISCV_CFLAGS    += -march=$(RISCV_ARCH) -mabi=$(RISCV_ABI) -mcmodel=$(RISCV_CMODEL)
